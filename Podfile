@@ -5,6 +5,10 @@
 
 target 'office' do
 
+pod 'FontAwesome+iOS'
+pod 'OCMapper'
+pod 'AFNetworking'
+
 end
 
 target 'officeTests' do
