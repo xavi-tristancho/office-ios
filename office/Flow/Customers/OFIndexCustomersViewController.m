@@ -6,12 +6,12 @@
 //  Copyright © 2015 Xavier Tristancho Bordoy. All rights reserved.
 //
 
-#import "OFCustomersViewController.h"
+#import "OFIndexCustomersViewController.h"
 #import "APLFontAwesome.h"
 #import "OFCustomersService.h"
 #import "OFCustomer.h"
 
-@interface OFCustomersViewController () <UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating>
+@interface OFIndexCustomersViewController () <UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating>
 
 //Connections
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -46,7 +46,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     _searchController.searchResultsUpdater = self;
     _searchController.dimsBackgroundDuringPresentation = false;

@@ -13,6 +13,10 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *secondName;
+@property (strong, nonatomic) NSString *alias;
+@property (strong, nonatomic) NSString *mobilePhone;
+@property (strong, nonatomic) NSString *dni;
+@property (strong, nonatomic) NSString *email;
 
 - (NSString *)getFullName;
 

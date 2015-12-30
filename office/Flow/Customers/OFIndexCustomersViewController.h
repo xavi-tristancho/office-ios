@@ -8,6 +8,6 @@
 
 #import "OFViewController.h"
 
-@interface OFCustomersViewController : OFViewController
+@interface OFIndexCustomersViewController : OFViewController
 
 @end

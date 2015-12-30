@@ -7,7 +7,7 @@
 //
 
 #import "OFRootViewController.h"
-#import "OFCustomersViewController.h"
+#import "OFIndexCustomersViewController.h"
 
 @interface OFRootViewController ()
 
@@ -23,7 +23,7 @@
     {
         [self.tabBar setTintColor:[UIColor blackColor]];
         
-        OFCustomersViewController *customersViewController = [OFCustomersViewController new];
+        OFIndexCustomersViewController *customersViewController = [OFIndexCustomersViewController new];
         [self setViewControllers:@[customersViewController]];
     }
     
@@ -34,7 +34,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
 }
 
 @end
