@@ -7,9 +7,16 @@
 //
 
 #import "OFAPIClient.h"
+#import "OFArticle.h"
 
 @interface OFArticlesService : OFAPIClient
 
 - (NSURLSessionDataTask *)getAllWithCompletion:(void (^)(NSArray *customers))completion;
+
+- (NSURLSessionDataTask *)find:(OFArticle *)article
+                withCompletion:(void (^)( OFArticle *article))completion;
+
+- (NSURLSessionDataTask *)save:(OFArticle *)article
+                withCompletion:(void (^)())completion;
 
 @end

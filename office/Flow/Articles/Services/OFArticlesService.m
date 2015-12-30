@@ -7,25 +7,62 @@
 //
 
 #import "OFArticlesService.h"
-#import "OFArticle.h"
 
 @implementation OFArticlesService
 
-- (NSURLSessionDataTask *)getAllWithCompletion:(void (^)(NSArray *customers))completion
+- (NSURLSessionDataTask *)getAllWithCompletion:(void (^)(NSArray *articles))completion
 {
-    return [self GET:@"customers"
+    return [self GET:@"articles"
           parameters:nil
             progress:nil
              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
             {
-                NSArray *customers = [OFArticle objectFromDictionary:[responseObject objectForKey:@"data"]];
+                NSArray *articles = [OFArticle objectFromDictionary:[responseObject objectForKey:@"data"]];
                 
-                if (completion) completion(customers);
+                if (completion) completion(articles);
             }
              failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
             {
                 
             }];
+}
+
+- (NSURLSessionDataTask *)find:(OFArticle *)article
+                withCompletion:(void (^)( OFArticle *article))completion
+{
+    NSString *uri = [NSString stringWithFormat:@"articles/%@", [article ID]];
+    
+    return [self GET:uri
+          parameters:nil
+            progress:nil
+             success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+            {
+                OFArticle *article = [OFArticle objectFromDictionary:[responseObject objectForKey:@"data"]];
+                
+                if (completion) completion(article);
+            }
+             failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+            {
+                
+            }];
+}
+
+- (NSURLSessionDataTask *)save:(OFArticle *)article
+                withCompletion:(void (^)())completion
+{
+    self.requestSerializer = [AFJSONRequestSerializer serializer];
+    NSString *uri = [NSString stringWithFormat:@"articles/%@", [article ID]];
+    
+    return [self PATCH:uri
+            parameters:[article toJSON]
+               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    {
+        if (completion) completion();
+    }
+               failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+    {
+    
+    }];
 }
 
 @end
