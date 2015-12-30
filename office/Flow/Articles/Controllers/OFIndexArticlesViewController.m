@@ -38,7 +38,7 @@
                                                 frame:CGRectMake(0, 0, 20, 20)];
         
         [[self tabBarItem] setImage:icon];
-        [[self tabBarItem] setTitle:@"Articulos"];
+        [[self tabBarItem] setTitle:NSLocalizedString(@"Articles", @"")];
     }
     
     return self;

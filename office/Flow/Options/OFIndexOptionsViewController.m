@@ -23,13 +23,13 @@
     
     if (self)
     {
-        UIImage *icon = [APLFontAwesome imageFromIcon:@"\uf085"
+        UIImage *icon = [APLFontAwesome imageFromIcon:@"\uf013"
                                                  size:20.0f
                                                 color:[UIColor blackColor]
                                                 frame:CGRectMake(0, 0, 20, 20)];
         
         [[self tabBarItem] setImage:icon];
-        [[self tabBarItem] setTitle:@"Opciones"];
+        [[self tabBarItem] setTitle:NSLocalizedString(@"Options", @"")];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *protocol = [defaults objectForKey:@"api_protocol"];
