@@ -8,7 +8,10 @@
 
 #import "AFHTTPSessionManager.h"
 #import "OCMapper.h"
+#import <TWMessageBarManager/TWMessageBarManager.h>
 
 @interface OFAPIClient : AFHTTPSessionManager
+
+- (void)showErrorMessage;
 
 @end

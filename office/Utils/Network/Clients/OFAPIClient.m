@@ -8,7 +8,8 @@
 
 #import "OFAPIClient.h"
 
-static NSString *HOST_URL = @"http://localhost:8080/";
+//static NSString *HOST_URL = @"http://localhost:8888/";
+static NSString *HOST_URL = @"http://192.168.1.5:8080/backend/public/";
 static NSString *API_URL  = @"api/";
 
 @implementation OFAPIClient
@@ -23,6 +24,16 @@ static NSString *API_URL  = @"api/";
     }
     
     return self;
+}
+
+- (void)showErrorMessage
+{
+    [[TWMessageBarManager sharedInstance] showMessageWithTitle:NSLocalizedString(@"Fail!", @"")
+                                                   description:NSLocalizedString(@"Oops, something went wrong", @"")
+                                                          type:TWMessageBarMessageTypeError
+                                                      duration:3.0f
+                                               displayLocation:TWMessageBarDisplayLocationBottom
+                                                      callback:nil];
 }
 
 @end

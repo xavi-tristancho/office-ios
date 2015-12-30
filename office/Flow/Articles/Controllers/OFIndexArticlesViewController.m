@@ -1,21 +1,22 @@
 //
-//  OFCustomersViewController.m
+//  OFIndexArticlesViewController.m
 //  office
 //
-//  Created by Xavier Tristancho Bordoy on 28/12/15.
+//  Created by Xavier Tristancho Bordoy on 30/12/15.
 //  Copyright © 2015 Xavier Tristancho Bordoy. All rights reserved.
 //
 
-#import "OFIndexCustomersViewController.h"
+#import "OFIndexArticlesViewController.h"
+#import "OFShowArticlesViewController.h"
+#import "OFArticlesService.h"
+#import "OFArticle.h"
+
 #import "APLFontAwesome.h"
-#import "OFCustomersService.h"
-#import "OFCustomer.h"
 
-@interface OFIndexCustomersViewController () <UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating>
+@interface OFIndexArticlesViewController () <UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UITableViewDelegate>
 
-//Connections
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) NSArray *customers;
@@ -23,7 +24,7 @@
 
 @end
 
-@implementation OFIndexCustomersViewController
+@implementation OFIndexArticlesViewController
 
 - (instancetype)init
 {
@@ -31,13 +32,13 @@
     
     if (self)
     {
-        UIImage *icon = [APLFontAwesome imageFromIcon:@"\uf0c0"
+        UIImage *icon = [APLFontAwesome imageFromIcon:@"\uf290"
                                                  size:25.0f
                                                 color:[UIColor blackColor]
                                                 frame:CGRectMake(0, 0, 25, 25)];
         
         [[self tabBarItem] setImage:icon];
-        [[self tabBarItem] setTitle:@"Clientes"];
+        [[self tabBarItem] setTitle:@"Articulos"];
     }
     
     return self;
@@ -54,6 +55,7 @@
     _tableView.tableHeaderView = _searchController.searchBar;
     
     [_tableView setDataSource:self];
+    [_tableView setDelegate:self];
     [self getAllCustomers];
 }
 
@@ -61,13 +63,13 @@
 {
     __weak typeof(self)weakSelf = self;
     
-    OFCustomersService *customersService = [OFCustomersService new];
-    [customersService getAllWithCompletion:^(NSArray *customers)
-    {
-        [weakSelf setCustomers:customers];
-        [weakSelf setFilteredCustomers:customers];
-        [[weakSelf tableView] reloadData];
-    }];
+    OFArticlesService *articlesService = [OFArticlesService new];
+    [articlesService getAllWithCompletion:^(NSArray *customers)
+     {
+         [weakSelf setCustomers:customers];
+         [weakSelf setFilteredCustomers:customers];
+         [[weakSelf tableView] reloadData];
+     }];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
@@ -85,7 +87,7 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
-    NSPredicate *namePredicate = [NSPredicate predicateWithFormat:@"(SELF.getFullName contains[cd] %@)", searchText];
+    NSPredicate *namePredicate = [NSPredicate predicateWithFormat:@"(SELF.name contains[cd] %@)", searchText];
     
     _filteredCustomers = [_customers filteredArrayUsingPredicate:namePredicate];
 }
@@ -113,20 +115,40 @@
 {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     
-    OFCustomer *customer;
+    OFArticle *article = [self getArticleFromIndexPath:indexPath];
+    
+    [[cell textLabel] setText:[article name]];
+    
+    return cell;
+}
+
+- (OFArticle *)getArticleFromIndexPath:(NSIndexPath *)indexPath
+{
+    OFArticle *article;
     
     if (_searchController.active && ![_searchController.searchBar.text isEqual:@""])
     {
-        customer = _filteredCustomers[indexPath.row];
+        article = _filteredCustomers[indexPath.row];
     }
     else
     {
-        customer = _customers[indexPath.row];
+        article = _customers[indexPath.row];
     }
     
-    [[cell textLabel] setText:[customer getFullName]];
+    return article;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    OFArticle *article = [self getArticleFromIndexPath:indexPath];
     
-    return cell;
+    OFArticlesService *articleService = [OFArticlesService new];
+    [articleService find:article
+          withCompletion:^(OFArticle *article)
+    {
+        OFShowArticlesViewController *controller = [[OFShowArticlesViewController alloc] initWithArticle:article];
+        [[self navigationController] pushViewController:controller animated:YES];
+    }];
 }
 
 @end
