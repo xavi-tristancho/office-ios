@@ -23,7 +23,7 @@
 
 @end
 
-@implementation OFCustomersViewController
+@implementation OFIndexCustomersViewController
 
 - (instancetype)init
 {
