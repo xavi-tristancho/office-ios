@@ -9,6 +9,7 @@
 #import "OFRootViewController.h"
 #import "OFIndexCustomersViewController.h"
 #import "OFIndexArticlesViewController.h"
+#import "OFIndexOptionsViewController.h"
 
 @interface OFRootViewController ()
 
@@ -24,8 +25,11 @@
     {
         [self.tabBar setTintColor:[UIColor blackColor]];
         
+//        OFIndexCustomersViewController *customersViewController = [OFIndexCustomersViewController new];
         OFIndexArticlesViewController *articlesViewController = [OFIndexArticlesViewController new];
-        [self setViewControllers:@[articlesViewController]];
+        OFIndexOptionsViewController *optionsViewController = [OFIndexOptionsViewController new];
+        
+        [self setViewControllers:@[articlesViewController, optionsViewController]];
     }
     
     return self;
