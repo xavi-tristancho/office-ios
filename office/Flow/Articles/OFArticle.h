@@ -10,18 +10,6 @@
 
 @interface OFArticle : NSObject
 
-/*
- "id": 2,
- "reference": "00106-31",
- "name": "SIMON TRIPLE NORMAL",
- "family": "SIMON VARIOS",
- "provider": "SOCIAS Y ROSSELLO S.A.\r",
- "purchase_price": 2.27,
- "cost_price": 1.25,
- "sell_price": 2.27,
- "quantity": 0
- */
-
 @property (strong, nonatomic) NSNumber *ID;
 @property (strong, nonatomic) NSString *reference;
 @property (strong, nonatomic) NSString *name;
@@ -31,5 +19,7 @@
 @property (strong, nonatomic) NSNumber *costPrice;
 @property (strong, nonatomic) NSNumber *sellPrice;
 @property (strong, nonatomic) NSNumber *quantity;
+
+- (NSDictionary *)toJSON;
 
 @end

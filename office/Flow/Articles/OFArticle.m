@@ -10,4 +10,19 @@
 
 @implementation OFArticle
 
+- (NSDictionary *)toJSON
+{
+    return @{
+             @"id" : _ID,
+             @"reference" : _reference,
+             @"name" : _name,
+             @"family" : _family,
+             @"provider" : _provider,
+             @"purchase_price" : _purchasePrice,
+             @"cost_price" : _costPrice,
+             @"sell_price" : _sellPrice,
+             @"quantity" : _quantity,
+             };
+}
+
 @end
