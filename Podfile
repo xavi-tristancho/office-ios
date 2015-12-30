@@ -5,10 +5,10 @@
 
 target 'office' do
 
-pod 'FontAwesome+iOS'
 pod 'OCMapper'
 pod 'AFNetworking'
 pod 'FXForms'
+pod 'TWMessageBarManager', :git => 'https://github.com/rcedwards/TWMessageBarManager'
 
 end
 

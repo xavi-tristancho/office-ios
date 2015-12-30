@@ -32,7 +32,7 @@
     
     if (self)
     {
-        UIImage *icon = [APLFontAwesome imageFromIcon:@"\uf197"
+        UIImage *icon = [APLFontAwesome imageFromIcon:@"\uf290"
                                                  size:25.0f
                                                 color:[UIColor blackColor]
                                                 frame:CGRectMake(0, 0, 25, 25)];

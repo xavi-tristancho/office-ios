@@ -14,20 +14,29 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
-  - FontAwesome+iOS (0.1.4)
   - FXForms (1.2.14)
   - OCMapper (2.1)
+  - TWMessageBarManager (1.6.0)
 
 DEPENDENCIES:
   - AFNetworking
-  - FontAwesome+iOS
   - FXForms
   - OCMapper
+  - TWMessageBarManager (from `https://github.com/rcedwards/TWMessageBarManager`)
+
+EXTERNAL SOURCES:
+  TWMessageBarManager:
+    :git: https://github.com/rcedwards/TWMessageBarManager
+
+CHECKOUT OPTIONS:
+  TWMessageBarManager:
+    :commit: 9935db1d9f77565a6e2854aeeb7e98fdeccbbb00
+    :git: https://github.com/rcedwards/TWMessageBarManager
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
-  FontAwesome+iOS: 9070b682a9255ca0fdc34bcfb129ad0ba2b73b87
   FXForms: 724500c0c3f3eb3ba1004b3b83abcee55d3daf18
   OCMapper: fa22e7b51de7cc38e66b993037076d28a0f31b29
+  TWMessageBarManager: 628fdc97920561b1277b0e28633a026a9c23b924
 
 COCOAPODS: 0.39.0

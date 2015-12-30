@@ -23,7 +23,7 @@
             }
              failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
             {
-                
+                [super showErrorMessage];
             }];
 }
 
@@ -43,7 +43,7 @@
             }
              failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
             {
-                
+                [super showErrorMessage];
             }];
 }
 
@@ -57,11 +57,18 @@
             parameters:[article toJSON]
                success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
+        [[TWMessageBarManager sharedInstance] showMessageWithTitle:NSLocalizedString(@"Success!", @"")
+                                                       description:NSLocalizedString(@"The article has been saved", @"")
+                                                              type:TWMessageBarMessageTypeSuccess
+                                                          duration:3.0f
+                                                   displayLocation:TWMessageBarDisplayLocationBottom
+                                                          callback:nil];
+        
         if (completion) completion();
     }
                failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
     {
-    
+        [super showErrorMessage];
     }];
 }
 
