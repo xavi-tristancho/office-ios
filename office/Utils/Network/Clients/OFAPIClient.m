@@ -8,15 +8,20 @@
 
 #import "OFAPIClient.h"
 
-//static NSString *HOST_URL = @"http://localhost:8888/";
-static NSString *HOST_URL = @"http://192.168.1.5:8080/backend/public/";
-static NSString *API_URL  = @"api/";
-
 @implementation OFAPIClient
 
 - (instancetype)init
 {
-    self = [super initWithBaseURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", HOST_URL, API_URL]]];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *protocol = [defaults objectForKey:@"api_protocol"];
+    NSString *host     = [defaults objectForKey:@"api_host"];
+    NSNumber *port     = [defaults objectForKey:@"api_port"];
+    NSString *api      = [defaults objectForKey:@"api_prefix"];
+    
+    NSString *baseUrl = [NSString stringWithFormat:@"%@://%@:%@/%@", protocol, host, [port stringValue], api];
+    
+    self = [super initWithBaseURL:[NSURL URLWithString:baseUrl]];
 
     if (self)
     {

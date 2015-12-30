@@ -10,3 +10,6 @@
 "Success!" = "Éxito";
 "The article has been saved" = "Se ha guardado el artículo";
 "Oops, something went wrong" = "Oops, algo ha ido mal";
+"Protocol" = "Protocolo";
+"Host" = "Servidor";
+"Port" = "Puerto";

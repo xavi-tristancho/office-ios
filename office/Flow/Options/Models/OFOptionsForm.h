@@ -11,7 +11,9 @@
 
 @interface OFOptionsForm : NSObject <FXForm>
 
-@property (strong, nonatomic) NSString   *host;
-@property (nonatomic)         NSUInteger *port;
+@property (strong, nonatomic) NSString *protocol;
+@property (strong, nonatomic) NSString *host;
+@property (strong, nonatomic) NSNumber *port;
+@property (strong, nonatomic) NSString *api;
 
 @end

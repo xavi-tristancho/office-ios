@@ -10,4 +10,19 @@
 
 @implementation OFOptionsForm 
 
+- (NSArray *)extraFields
+{
+    return @[
+             
+             //this field doesn't correspond to any property of the form
+             //it's just an action button. the action will be called on first
+             //object in the responder chain that implements the submitForm
+             
+             @{FXFormFieldTitle : NSLocalizedString(@"Save", @""),
+               FXFormFieldHeader: @"",
+               FXFormFieldAction: @"didTapSaveButton"},
+             
+             ];
+}
+
 @end

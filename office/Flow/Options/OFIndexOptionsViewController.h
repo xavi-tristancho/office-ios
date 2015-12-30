@@ -8,6 +8,6 @@
 
 #import <FXForms/FXForms.h>
 
-@interface OFIndexOptionsViewController : FXFormController
+@interface OFIndexOptionsViewController : FXFormViewController
 
 @end
