@@ -11,6 +11,9 @@
 #import "OFArticlesService.h"
 #import "OFArticle.h"
 
+#import "OFIndexInventoryViewController.h"
+#import "OFInventoryService.h"
+
 #import "APLFontAwesome.h"
 
 @interface OFIndexArticlesViewController () <UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UITableViewDelegate>
@@ -47,6 +50,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self setLeftNavigationBarButton];
     
     _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     _searchController.searchResultsUpdater = self;
@@ -158,6 +163,31 @@
     }];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)setLeftNavigationBarButton
+{
+    UIImage *menuIcon = [APLFontAwesome imageFromIcon:@"\uf1b3"
+                                                 size:15
+                                                color:[UIColor blackColor]
+                                                frame:CGRectMake(0, 0, 20, 20)];
+    
+    UIBarButtonItem *menu = [[UIBarButtonItem alloc] initWithImage: menuIcon
+                                                             style: UIBarButtonItemStylePlain
+                                                            target: self
+                                                            action: @selector(presentInventory)];
+    [menu setTintColor:[UIColor blackColor]];
+    [self.navigationItem setLeftBarButtonItem:menu animated:YES];
+}
+
+- (void)presentInventory
+{
+    OFIndexInventoryViewController *inventoryController = [OFIndexInventoryViewController new];
+    UINavigationController *inventoryNav = [[UINavigationController alloc] initWithRootViewController:inventoryController];
+    
+    [[self navigationController] presentViewController:inventoryNav
+                                              animated:YES
+                                            completion:nil];
 }
 
 @end
