@@ -11,6 +11,6 @@
 
 @interface OFInventoryForm : NSObject <FXForm>
 
-@property (strong, nonatomic, readonly) NSNumber *total;
+@property (strong, nonatomic) NSNumber *total;
 
 @end

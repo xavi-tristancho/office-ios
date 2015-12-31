@@ -168,9 +168,9 @@
 - (void)setLeftNavigationBarButton
 {
     UIImage *menuIcon = [APLFontAwesome imageFromIcon:@"\uf1b3"
-                                                 size:15
+                                                 size:20
                                                 color:[UIColor blackColor]
-                                                frame:CGRectMake(0, 0, 20, 20)];
+                                                frame:CGRectMake(0, 0, 30, 30)];
     
     UIBarButtonItem *menu = [[UIBarButtonItem alloc] initWithImage: menuIcon
                                                              style: UIBarButtonItemStylePlain
