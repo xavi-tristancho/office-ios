@@ -25,7 +25,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewDidAppear:animated];        
     
     NSLog(@"%@ did Appeared", NSStringFromClass([self class]));
 }

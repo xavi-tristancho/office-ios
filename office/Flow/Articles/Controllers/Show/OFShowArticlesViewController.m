@@ -27,6 +27,13 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self setTitle:NSLocalizedString(@"Article", @"")];
+}
+
 - (void)didTapSaveButton
 {
     OFArticlesService *articleService = [OFArticlesService new];

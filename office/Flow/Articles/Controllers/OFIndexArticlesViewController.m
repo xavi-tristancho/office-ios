@@ -59,6 +59,13 @@
     [self getAllCustomers];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self setTitle:NSLocalizedString(@"Articles", @"")];
+}
+
 - (void)getAllCustomers
 {
     __weak typeof(self)weakSelf = self;
@@ -149,6 +156,8 @@
         OFShowArticlesViewController *controller = [[OFShowArticlesViewController alloc] initWithArticle:article];
         [[self navigationController] pushViewController:controller animated:YES];
     }];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

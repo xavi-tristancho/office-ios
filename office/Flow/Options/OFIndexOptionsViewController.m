@@ -22,7 +22,7 @@
     self = [super init];
     
     if (self)
-    {
+    {        
         UIImage *icon = [APLFontAwesome imageFromIcon:@"\uf013"
                                                  size:20.0f
                                                 color:[UIColor blackColor]
@@ -63,6 +63,13 @@
     }
     
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self setTitle:NSLocalizedString(@"Options", @"")];
 }
 
 - (void)didTapSaveButton

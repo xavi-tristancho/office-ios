@@ -29,7 +29,7 @@
         OFIndexArticlesViewController *articlesViewController = [OFIndexArticlesViewController new];
         OFIndexOptionsViewController *optionsViewController = [OFIndexOptionsViewController new];
         
-        [self setViewControllers:@[articlesViewController, optionsViewController]];
+        [self setViewControllers:[self instantiateTabBarControllers:@[articlesViewController, optionsViewController]]];
     }
     
     return self;
@@ -39,6 +39,19 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (NSArray *)instantiateTabBarControllers:(NSArray *)controllers
+{
+    NSMutableArray *tabBarControllers = [NSMutableArray new];
+    
+    for (UIViewController *controller in controllers)
+    {
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+        [tabBarControllers addObject:navController];
+    }
+    
+    return tabBarControllers;
 }
 
 @end
