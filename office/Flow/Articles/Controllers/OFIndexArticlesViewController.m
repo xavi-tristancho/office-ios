@@ -19,7 +19,6 @@
 @interface OFIndexArticlesViewController () <UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) NSArray *customers;
@@ -56,7 +55,8 @@
     _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     _searchController.searchResultsUpdater = self;
     _searchController.dimsBackgroundDuringPresentation = false;
-    _searchController.definesPresentationContext = true;
+    self.definesPresentationContext = true;
+    _searchController.searchBar.delegate = self;
     _tableView.tableHeaderView = _searchController.searchBar;
     
     [_tableView setDataSource:self];

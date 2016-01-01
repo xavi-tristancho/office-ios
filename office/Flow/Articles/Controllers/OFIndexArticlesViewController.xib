@@ -7,8 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OFIndexArticlesViewController">
             <connections>
-                <outlet property="searchBar" destination="76F-Lv-QJJ" id="aWF-0t-KEu"/>
-                <outlet property="searchDisplayController" destination="GSI-8O-2fu" id="kXe-T1-3aM"/>
                 <outlet property="tableView" destination="YtM-LA-24H" id="pLY-HP-Wqw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,14 +19,6 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YtM-LA-24H">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <searchBar key="tableHeaderView" contentMode="redraw" id="76F-Lv-QJJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <textInputTraits key="textInputTraits"/>
-                        <connections>
-                            <outlet property="delegate" destination="-1" id="1Vo-K7-Tp0"/>
-                        </connections>
-                    </searchBar>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -40,14 +30,5 @@
             </constraints>
             <point key="canvasLocation" x="365" y="405"/>
         </view>
-        <searchDisplayController id="GSI-8O-2fu">
-            <connections>
-                <outlet property="delegate" destination="-1" id="JW5-Vh-5eq"/>
-                <outlet property="searchBar" destination="76F-Lv-QJJ" id="daK-cj-dhJ"/>
-                <outlet property="searchContentsController" destination="-1" id="5mw-oR-HYK"/>
-                <outlet property="searchResultsDataSource" destination="-1" id="lnN-qh-Tgf"/>
-                <outlet property="searchResultsDelegate" destination="-1" id="Bzb-gO-6Mf"/>
-            </connections>
-        </searchDisplayController>
     </objects>
 </document>
