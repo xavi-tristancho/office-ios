@@ -16,13 +16,7 @@
 
 #import "APLFontAwesome.h"
 
-@interface OFIndexArticlesViewController () <UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UITableViewDelegate>
-
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-
-@property (strong, nonatomic) UISearchController *searchController;
-@property (strong, nonatomic) NSArray *customers;
-@property (strong, nonatomic) NSArray *filteredCustomers;
+@interface OFIndexArticlesViewController ()
 
 @end
 
@@ -52,15 +46,6 @@
     
     [self setLeftNavigationBarButton];
     
-    _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    _searchController.searchResultsUpdater = self;
-    _searchController.dimsBackgroundDuringPresentation = false;
-    self.definesPresentationContext = true;
-    _searchController.searchBar.delegate = self;
-    _tableView.tableHeaderView = _searchController.searchBar;
-    
-    [_tableView setDataSource:self];
-    [_tableView setDelegate:self];
     [self getAllCustomers];
 }
 
@@ -78,48 +63,10 @@
     OFArticlesService *articlesService = [OFArticlesService new];
     [articlesService getAllWithCompletion:^(NSArray *customers)
      {
-         [weakSelf setCustomers:customers];
-         [weakSelf setFilteredCustomers:customers];
-         [[weakSelf tableView] reloadData];
+         weakSelf.items = customers;
+         weakSelf.filteredItems = customers;
+         [weakSelf.tableView reloadData];
      }];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
-{
-    [self updateSearchResultsForSearchController:self.searchController];
-}
-
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
-{
-    NSString *searchString = searchController.searchBar.text;
-    [self filterContentForSearchText:searchString scope:nil];
-    
-    [self.tableView reloadData];
-}
-
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
-{
-    NSPredicate *namePredicate = [NSPredicate predicateWithFormat:@"(SELF.name contains[cd] %@)", searchText];
-    
-    _filteredCustomers = [_customers filteredArrayUsingPredicate:namePredicate];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section
-{
-    if (_searchController.active && ![_searchController.searchBar.text isEqual:@""])
-    {
-        return [_filteredCustomers count];
-    }
-    else
-    {
-        return [_customers count];
-    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -138,13 +85,13 @@
 {
     OFArticle *article;
     
-    if (_searchController.active && ![_searchController.searchBar.text isEqual:@""])
+    if (self.searchController.active && ![self.searchController.searchBar.text isEqual:@""])
     {
-        article = _filteredCustomers[indexPath.row];
+        article = self.filteredItems[indexPath.row];
     }
     else
     {
-        article = _customers[indexPath.row];
+        article = self.items[indexPath.row];
     }
     
     return article;

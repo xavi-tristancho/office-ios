@@ -6,8 +6,8 @@
 //  Copyright © 2015 Xavier Tristancho Bordoy. All rights reserved.
 //
 
-#import "OFViewController.h"
+#import "OFSearchableTableViewController.h"
 
-@interface OFIndexArticlesViewController : OFViewController
+@interface OFIndexArticlesViewController : OFSearchableTableViewController
 
 @end
