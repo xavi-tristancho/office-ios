@@ -15,8 +15,11 @@
 #import "OFInventoryService.h"
 
 #import "APLFontAwesome.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface OFIndexArticlesViewController ()
+
+@property (nonatomic) BOOL firstTimeAppearing;
 
 @end
 
@@ -28,6 +31,7 @@
     
     if (self)
     {
+        self.firstTimeAppearing = YES;
         UIImage *icon = [APLFontAwesome imageFromIcon:@"\uf290"
                                                  size:20.0f
                                                 color:[UIColor blackColor]
@@ -45,8 +49,6 @@
     [super viewDidLoad];
     
     [self setLeftNavigationBarButton];
-    
-    [self getAllCustomers];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -54,29 +56,42 @@
     [super viewDidAppear:animated];
     
     [self setTitle:NSLocalizedString(@"Articles", @"")];
+    
+    [self getAllArticles];
 }
 
-- (void)getAllCustomers
+- (void)getAllArticles
 {
     __weak typeof(self)weakSelf = self;
     
+    if(self.firstTimeAppearing)[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     OFArticlesService *articlesService = [OFArticlesService new];
-    [articlesService getAllWithCompletion:^(NSArray *customers)
+    [articlesService getAllWithCompletion:^(NSArray *articles)
      {
-         weakSelf.items = customers;
-         weakSelf.filteredItems = customers;
-         [weakSelf.tableView reloadData];
+         if(weakSelf.firstTimeAppearing)[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+         [weakSelf setUpItems:articles];
+         weakSelf.firstTimeAppearing = NO;
      }];
+}
+
+- (void)setUpItems:(NSArray *)articles
+{
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    NSArray *sortedArticles = [articles sortedArrayUsingDescriptors:@[sort]];
+    self.items = sortedArticles;
+    self.filteredItems = sortedArticles;
+    [self.tableView reloadData];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"articleCell"];
     
     OFArticle *article = [self getArticleFromIndexPath:indexPath];
     
     [[cell textLabel] setText:[article name]];
+    [cell.detailTextLabel setText:NSLocalizedString([article lastModified], @"")];
     
     return cell;
 }
@@ -99,12 +114,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof(self)weakSelf = self;
+    
     OFArticle *article = [self getArticleFromIndexPath:indexPath];
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     OFArticlesService *articleService = [OFArticlesService new];
+    
     [articleService find:article
           withCompletion:^(OFArticle *article)
     {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         OFShowArticlesViewController *controller = [[OFShowArticlesViewController alloc] initWithArticle:article];
         [[self navigationController] pushViewController:controller animated:YES];
     }];

@@ -9,6 +9,7 @@ pod 'OCMapper'
 pod 'AFNetworking'
 pod 'FXForms'
 pod 'TWMessageBarManager', :git => 'https://github.com/rcedwards/TWMessageBarManager'
+pod 'MBProgressHUD', '~> 0.9.2'
 
 end
 

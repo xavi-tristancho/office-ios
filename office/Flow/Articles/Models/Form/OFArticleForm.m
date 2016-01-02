@@ -32,7 +32,7 @@
 
 - (NSArray *)excludedFields
 {
-    return @[@"ID"];
+    return @[@"ID", @"lastModified"];
 }
 
 - (NSArray *)extraFields

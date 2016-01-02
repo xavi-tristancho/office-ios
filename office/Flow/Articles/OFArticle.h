@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSNumber *costPrice;
 @property (strong, nonatomic) NSNumber *sellPrice;
 @property (strong, nonatomic) NSNumber *quantity;
+@property (strong, nonatomic) NSString *lastModified;
 
 - (NSDictionary *)toJSON;
 
