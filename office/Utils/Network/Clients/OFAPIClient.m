@@ -8,20 +8,13 @@
 
 #import "OFAPIClient.h"
 
+NSString *const apiURL = @"http://52.48.158.208/office-backend/public/api/";
+
 @implementation OFAPIClient
 
 - (instancetype)init
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString *protocol = [defaults objectForKey:@"api_protocol"];
-    NSString *host     = [defaults objectForKey:@"api_host"];
-    NSNumber *port     = [defaults objectForKey:@"api_port"];
-    NSString *api      = [defaults objectForKey:@"api_prefix"];
-    
-    NSString *baseUrl = [NSString stringWithFormat:@"%@://%@:%@/%@", protocol, host, [port stringValue], api];
-    
-    self = [super initWithBaseURL:[NSURL URLWithString:baseUrl]];
+    self = [super initWithBaseURL:[NSURL URLWithString:apiURL]];
 
     if (self)
     {

@@ -25,11 +25,9 @@
     {
         [self.tabBar setTintColor:[UIColor blackColor]];
         
-//        OFIndexCustomersViewController *customersViewController = [OFIndexCustomersViewController new];
         OFIndexArticlesViewController *articlesViewController = [OFIndexArticlesViewController new];
-        OFIndexOptionsViewController *optionsViewController = [OFIndexOptionsViewController new];
         
-        [self setViewControllers:[self instantiateTabBarControllers:@[articlesViewController, optionsViewController]]];
+        [self setViewControllers:[self instantiateTabBarControllers:@[articlesViewController]]];
     }
     
     return self;
