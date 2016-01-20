@@ -49,6 +49,8 @@
     [super viewDidLoad];
     
     [self setLeftNavigationBarButton];
+    
+    [self setUpRefreshControl];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -60,6 +62,17 @@
     [self getAllArticles];
 }
 
+- (void)setUpRefreshControl
+{
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor clearColor];
+    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(getAllArticles)
+                  forControlEvents:UIControlEventValueChanged];
+
+}
+
 - (void)getAllArticles
 {
     __weak typeof(self)weakSelf = self;
@@ -68,6 +81,7 @@
     OFArticlesService *articlesService = [OFArticlesService new];
     [articlesService getAllWithCompletion:^(NSArray *articles)
      {
+         [weakSelf.refreshControl endRefreshing];
          if(weakSelf.firstTimeAppearing)[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
          [weakSelf setUpItems:articles];
          weakSelf.firstTimeAppearing = NO;
